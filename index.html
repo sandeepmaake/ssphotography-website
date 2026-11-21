@@ -203,14 +203,14 @@
             <button onclick="navigateTo('contact')" data-nav="contact" id="nav-label-contact" class="nav-link text-xs uppercase tracking-[0.2em] text-ivory/80 transition-colors hover:text-champagne">Contact</button>
           </nav>
 
-          <!-- Right Actions: Primary Header CTA Only (Zero Public Admin Buttons) -->
+          <!-- Right Actions: Primary Header CTA Only -->
           <div class="hidden md:flex items-center gap-3 shrink-0">
             <button id="header-cta-btn" onclick="navigateTo('contact')" class="px-5 py-2.5 rounded-lg bg-champagne text-deepblack text-xs font-semibold uppercase tracking-[0.16em] hover:bg-ivory transition-all shadow-lg shadow-champagne/10">
               Inquire
             </button>
           </div>
 
-          <!-- Mobile Hamburger Toggle (Touch-Friendly 44px Target) -->
+          <!-- Mobile Hamburger Toggle -->
           <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu" class="lg:hidden w-11 h-11 rounded-lg text-ivory hover:text-champagne border border-ivory/15 flex items-center justify-center shrink-0">
             <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
           </button>
@@ -551,7 +551,7 @@
           </p>
         </div>
 
-        <!-- Category Filter Tabs (Horizontal Scrollable on Mobile) -->
+        <!-- Category Filter Tabs -->
         <div id="portfolio-filters" class="flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center gap-2.5 mb-10 overflow-x-auto pb-2"></div>
 
         <!-- Responsive Photo Grid -->
@@ -559,7 +559,6 @@
 
         <!-- DEDICATED CINEMATIC FILMS & INSTAGRAM REELS SHOWCASE -->
         <div class="mt-20 sm:mt-24 pt-16 sm:pt-20 border-t border-champagne/20 space-y-16 sm:space-y-20">
-          <!-- Part A: YouTube Wedding Films (16:9 Widescreen Showcase) -->
           <div>
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
               <div>
@@ -571,7 +570,6 @@
             <div id="portfolio-youtube-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8"></div>
           </div>
 
-          <!-- Part B: Instagram Reels Vertical Showcase (9:16 Portrait Cards) -->
           <div>
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
               <div>
@@ -884,7 +882,7 @@
               <span id="footer-brand-name" class="font-serif text-lg tracking-[0.16em] text-ivory uppercase">AURELIA FRAMES</span>
             </div>
             <p id="footer-description-text" class="text-xs text-ivory/60 leading-relaxed">
-              Luxury candid wedding photography and 4K cinematography studio based in Rajahmundry, Andhra Pradesh. Preserving timeless South Indian love stories.
+              Luxury candid wedding photography and 4K cinematography studio. Preserving timeless love stories across India and beyond.
             </p>
             <div class="flex items-center gap-3 pt-1">
               <a id="footer-ig" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-ivory/75 hover:text-champagne hover:border-champagne transition-colors">
@@ -925,7 +923,7 @@
             </ul>
           </div>
 
-          <!-- Contact Info (No Admin Buttons) -->
+          <!-- Contact Info -->
           <div class="space-y-3">
             <h4 id="footer-studio-heading" class="text-xs uppercase tracking-[0.22em] text-champagne font-semibold mb-4">Our Studio</h4>
             <p id="footer-address" class="text-xs text-ivory/70 leading-relaxed">Danavaipeta, Near Pushkar Ghat Road, Rajahmundry, AP 533103</p>
@@ -935,12 +933,13 @@
         </div>
 
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ivory/50 text-center sm:text-left">
-          <p id="footer-copyright-trigger" onclick="registerSecretTrigger()" class="cursor-default select-none">
+          <p id="footer-copyright-trigger" onclick="registerSecretTrigger()" class="cursor-default select-none py-1">
             &copy; <span id="copyright-year">2026</span> <span id="footer-copy-brand">AURELIA FRAMES</span>. <span id="footer-copy-suffix">All Rights Reserved.</span>
           </p>
-          <p id="footer-credit-text" class="tracking-wider">
-            Designed &amp; Developed by <a href="https://www.cbdigitalsolutions.in" target="_blank" rel="noopener noreferrer" class="text-champagne font-semibold hover:underline">CB DIGITAL SOLUTIONS</a>
-          </p>
+          <div class="tracking-wider flex items-center justify-center gap-1.5 relative z-30">
+            <span id="footer-credit-prefix">Designed &amp; Developed by</span>
+            <a id="footer-credit-link" href="https://www.cbdigitalsolutions.in" target="_blank" rel="noopener noreferrer" class="inline-block py-1.5 px-1 text-champagne font-semibold underline decoration-champagne/50 hover:decoration-champagne cursor-pointer">CB DIGITAL SOLUTIONS</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -958,7 +957,7 @@
   <!-- ===================================================================== -->
   <!-- FULL-SCREEN PORTFOLIO PHOTO LIGHTBOX MODAL (TOUCH-SWIPE ENABLED)      -->
   <!-- ===================================================================== -->
-  <div id="lightbox-modal" class="fixed inset-0 z-[92] hidden bg-deepblack/95 backdrop-blur-xl flex flex-col items-center justify-center p-3 sm:p-8">
+  <div id="lightbox-modal" onclick="if(event.target === this) closeLightbox()" class="fixed inset-0 z-[92] hidden bg-deepblack/95 backdrop-blur-xl flex flex-col items-center justify-center p-3 sm:p-8">
     <div class="w-full max-w-5xl flex items-center justify-between mb-3 sm:mb-4 gap-3">
       <div class="min-w-0">
         <p id="lightbox-category" class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-champagne truncate">Category</p>
@@ -986,7 +985,7 @@
   <!-- ===================================================================== -->
   <!-- CINEMATIC FILM & INSTAGRAM REEL PREVIEW MODAL                         -->
   <!-- ===================================================================== -->
-  <div id="film-modal" class="fixed inset-0 z-[90] hidden bg-deepblack/95 backdrop-blur-xl flex items-center justify-center p-3 sm:p-8">
+  <div id="film-modal" onclick="if(event.target === this) closeFilmModal()" class="fixed inset-0 z-[90] hidden bg-deepblack/95 backdrop-blur-xl flex items-center justify-center p-3 sm:p-8">
     <div id="film-modal-box" class="max-w-4xl w-full rounded-2xl overflow-hidden luxury-card bg-deepblack transition-all">
       <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-3">
         <div class="min-w-0">
@@ -1019,7 +1018,7 @@
           <div class="w-12 h-12 rounded-full border border-champagne flex items-center justify-center mx-auto text-champagne mb-3">
             <i class="fa-solid fa-shield-halved text-lg"></i>
           </div>
-          <p class="text-[11px] uppercase tracking-[0.28em] text-champagne">Restricted Studio Access</p>
+          <p class="text-[11px] uppercase tracking-[0.28em] text-champagne">Restricted Studio Access &bull; v4.2</p>
           <h2 class="font-serif text-3xl text-ivory">Admin Vault</h2>
           <p class="text-xs text-ivory/60">Enter your authorized studio credentials to continue.</p>
         </div>
@@ -1099,7 +1098,7 @@
         <div class="hidden lg:block pt-6 border-t border-white/10 space-y-3">
           <div id="rtdb-status-badge" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] uppercase tracking-widest text-emerald-300">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Realtime Cloud Sync</span>
+            <span>Local Studio Storage</span>
           </div>
           <button onclick="exitAdminPortal()" class="w-full py-3 rounded-xl border border-champagne/40 text-champagne text-xs uppercase tracking-[0.16em] hover:bg-champagne hover:text-deepblack transition-all flex items-center justify-center gap-2">
             <i class="fa-solid fa-globe"></i>
@@ -1111,7 +1110,7 @@
         </div>
       </aside>
 
-      <!-- Admin Main Content Area (Responsive Scroll on Mobile & Desktop) -->
+      <!-- Admin Main Content Area -->
       <div class="flex-1 p-4 sm:p-8 lg:p-10 lg:overflow-y-auto lg:max-h-screen">
 
         <!-- 6.1 DASHBOARD OVERVIEW -->
@@ -1200,31 +1199,35 @@
           <div id="admin-albums-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
         </div>
 
-        <!-- 6.3 PHOTO MANAGEMENT -->
+        <!-- 6.3 PHOTO MANAGEMENT (WITH AUTO-COMPRESSION UPLOAD + URL) -->
         <div id="admin-tab-photos" class="admin-panel hidden space-y-8">
           <div>
             <p class="text-xs uppercase tracking-[0.25em] text-champagne">Photo Management</p>
-            <h1 class="font-serif text-2xl sm:text-3xl text-ivory mt-1">Gallery Upload, Captions &amp; Reordering</h1>
+            <h1 class="font-serif text-2xl sm:text-3xl text-ivory mt-1">Gallery Upload, Auto-Compress &amp; Reordering</h1>
           </div>
 
-          <div class="p-5 sm:p-6 rounded-2xl luxury-card">
-            <h2 class="font-serif text-lg text-ivory mb-4">Add Photograph to Album</h2>
+          <div class="p-5 sm:p-6 rounded-2xl luxury-card space-y-4">
+            <h2 class="font-serif text-lg text-ivory">Add Photograph to Album (Auto-Compressed on Upload)</h2>
             <form onsubmit="handleAddPhoto(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
               <div class="md:col-span-3">
                 <label class="block text-[11px] uppercase tracking-wider text-ivory/70 mb-1.5">Target Album</label>
                 <select id="photo-album-select" onchange="renderAdminPhotos()" class="w-full px-3.5 py-2.5 rounded-xl luxury-input"></select>
               </div>
-              <div class="md:col-span-4">
-                <label class="block text-[11px] uppercase tracking-wider text-ivory/70 mb-1.5">Image URL</label>
-                <input type="url" id="photo-url-input" required placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2.5 rounded-xl luxury-input" />
+              <div class="md:col-span-3">
+                <label class="block text-[11px] uppercase tracking-wider text-ivory/70 mb-1.5">Upload Photo File (Auto-Compress)</label>
+                <input type="file" id="photo-file-input" accept="image/*" onchange="handleGalleryPhotoFileCompress(event)" class="w-full px-3 py-2 rounded-xl luxury-input text-xs file:mr-2.5 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-champagne file:text-deepblack file:font-semibold" />
+              </div>
+              <div class="md:col-span-3">
+                <label class="block text-[11px] uppercase tracking-wider text-ivory/70 mb-1.5">Or Paste Image URL</label>
+                <input type="text" id="photo-url-input" required placeholder="https://... or auto-filled after upload" class="w-full px-3.5 py-2.5 rounded-xl luxury-input" />
               </div>
               <div class="md:col-span-3">
                 <label class="block text-[11px] uppercase tracking-wider text-ivory/70 mb-1.5">Caption / Alt Text</label>
                 <input type="text" id="photo-caption-input" required placeholder="e.g., Jeelakarra Bellam Ritual" class="w-full px-3.5 py-2.5 rounded-xl luxury-input" />
               </div>
-              <div class="md:col-span-2">
-                <button type="submit" class="w-full py-3 rounded-xl bg-champagne text-deepblack text-xs font-semibold uppercase tracking-wider hover:bg-ivory">
-                  <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Add Photo
+              <div class="md:col-span-12 flex justify-end">
+                <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-champagne text-deepblack text-xs font-semibold uppercase tracking-wider hover:bg-ivory">
+                  <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> Add Photo to Gallery
                 </button>
               </div>
             </form>
@@ -1333,11 +1336,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-deepblack border border-white/10">
               <div>
                 <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Brand Logo Image URL</label>
-                <input type="url" id="cms-logo-url" placeholder="https://.../logo.png (Leave empty to show Monogram)" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+                <input type="text" id="cms-logo-url" placeholder="https://.../logo.png (Leave empty to show Monogram)" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
               </div>
               <div>
-                <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Or Upload Logo Image File</label>
+                <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Upload Logo Image File <span class="text-champagne">(Auto-Compressed)</span></label>
                 <input type="file" id="cms-logo-file" accept="image/*" onchange="handleLogoFileUpload(event)" class="w-full px-3 py-2 rounded-xl luxury-input text-xs file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-champagne file:text-deepblack file:font-semibold" />
+                <p class="text-[11px] text-ivory/50 mt-1">Any size PNG, JPG, or WebP is automatically compressed &amp; synced live.</p>
               </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -1407,9 +1411,15 @@
               <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Hero Sub-Headline Description</label>
               <textarea id="cms-hero-sub" rows="3" class="w-full px-4 py-2.5 rounded-xl luxury-input"></textarea>
             </div>
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Hero Background Image URL</label>
-              <input type="url" id="cms-hero-bg" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-deepblack border border-white/10">
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Hero Background Image URL</label>
+                <input type="text" id="cms-hero-bg" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Or Upload Hero Photo <span class="text-champagne">(Auto-Compressed)</span></label>
+                <input type="file" accept="image/*" onchange="handleHeroFileUpload(event)" class="w-full px-3 py-2 rounded-xl luxury-input text-xs file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-champagne file:text-deepblack file:font-semibold" />
+              </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -1520,7 +1530,7 @@
               </div>
             </div>
             <div>
-              <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Studio Address (Rajahmundry)</label>
+              <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Studio Address</label>
               <input type="text" id="cms-address" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1581,8 +1591,31 @@
                 <input type="text" id="cms-copy-suffix" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
               </div>
               <div>
-                <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Developer Credit Text</label>
-                <input type="text" id="cms-credit-text" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+                <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Developer Credit Prefix</label>
+                <input type="text" id="cms-credit-prefix" placeholder="e.g., Designed & Developed by" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+              </div>
+            </div>
+
+            <!-- Dedicated Direct Developer Link Manager Card -->
+            <div class="p-4 sm:p-5 rounded-xl bg-deepblack border border-champagne/35 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <p class="text-xs uppercase tracking-[0.2em] text-champagne font-semibold"><i class="fa-solid fa-link mr-1.5"></i>Developer Agency &amp; Redirect Link</p>
+                  <p class="text-[11px] text-ivory/60 mt-0.5">Directly add or update the clickable footer credit link.</p>
+                </div>
+                <button type="button" onclick="saveDeveloperCreditDirectly()" class="self-start sm:self-auto px-4 py-2.5 rounded-lg bg-champagne text-deepblack text-xs font-semibold uppercase tracking-wider hover:bg-ivory transition-all shrink-0">
+                  Save Link Now
+                </button>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Developer Agency Name</label>
+                  <input type="text" id="cms-credit-name" placeholder="CB DIGITAL SOLUTIONS" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+                </div>
+                <div>
+                  <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Developer Website Link</label>
+                  <input type="text" id="cms-credit-url" placeholder="https://www.cbdigitalsolutions.in" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+                </div>
               </div>
             </div>
             <div class="pt-2 border-t border-white/10 space-y-4">
@@ -1600,7 +1633,7 @@
           <!-- CMS PANEL 7: ADMIN CREDENTIALS & SECURITY -->
           <div id="cms-sec-security" class="cms-section-panel hidden p-5 sm:p-8 rounded-2xl luxury-card space-y-5 max-w-4xl">
             <h2 class="font-serif text-xl text-champagne">7. Admin Login Credentials &amp; Security</h2>
-            <p class="text-xs text-ivory/65">Update your secret Admin Vault username/email and password here. Changes sync immediately to your Firebase Realtime Database.</p>
+            <p class="text-xs text-ivory/65">Update your secret Admin Vault username/email and password here.</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Admin Username / Email</label>
@@ -1622,7 +1655,7 @@
           <div id="cms-sec-theme" class="cms-section-panel hidden p-5 sm:p-8 rounded-2xl luxury-card space-y-6 max-w-4xl">
             <div>
               <h2 class="font-serif text-xl text-champagne">8. Website Theme &amp; Color Palette</h2>
-              <p class="text-xs text-ivory/65 mt-1">Select a curated luxury wedding theme preset or customize colors below. Every change updates the public website and syncs live via Firebase.</p>
+              <p class="text-xs text-ivory/65 mt-1">Select a curated luxury wedding theme preset or customize colors below. Every change updates the public website immediately.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1713,7 +1746,7 @@
   </div>
 
   <!-- ===================================================================== -->
-  <!-- ADMIN CREATE / EDIT ALBUM MODAL                                       -->
+  <!-- ADMIN CREATE / EDIT ALBUM MODAL (WITH AUTO-COMPRESS COVER UPLOAD)     -->
   <!-- ===================================================================== -->
   <div id="album-form-modal" class="fixed inset-0 z-[95] hidden bg-deepblack/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div class="max-w-lg w-full p-6 sm:p-7 rounded-2xl luxury-card bg-charcoal space-y-5 my-auto">
@@ -1749,9 +1782,15 @@
           <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Wedding Venue</label>
           <input type="text" id="album-venue-input" required placeholder="e.g., River Bay Resort, Rajahmundry" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
         </div>
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Cover Photograph URL</label>
-          <input type="url" id="album-cover-input" required placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Upload Cover <span class="text-champagne">(Auto-Compress)</span></label>
+            <input type="file" accept="image/*" onchange="handleAlbumCoverFileCompress(event)" class="w-full px-3 py-2 rounded-xl luxury-input text-xs file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-champagne file:text-deepblack file:font-semibold" />
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Or Cover Image URL</label>
+            <input type="text" id="album-cover-input" required placeholder="https://... or upload file" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
+          </div>
         </div>
         <div>
           <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Story Narrative</label>
@@ -1769,54 +1808,9 @@
     </div>
   </div>
 
-  <!-- Firebase Realtime Database Module -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-
-    const firebaseRtdbApp = initializeApp({
-      databaseURL: "https://ss-wedding-website-default-rtdb.asia-southeast1.firebasedatabase.app/"
-    }, "weddingStudioRtdb");
-
-    const rtdb = getDatabase(firebaseRtdbApp);
-    const siteStateRef = ref(rtdb, "wedding_studio_cms_v1");
-    let isRemoteSyncApplying = false;
-
-    window.pushStateToFirebase = function (stateObj) {
-      if (isRemoteSyncApplying) return;
-      const sanitizedState = JSON.parse(JSON.stringify(stateObj));
-      set(siteStateRef, sanitizedState)
-        .then(() => {
-          const badge = document.getElementById("rtdb-status-badge");
-          if (badge) {
-            badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span>Synced to Firebase Live</span>`;
-          }
-        })
-        .catch((err) => {
-          console.error("Firebase Realtime Sync error:", err);
-          if (typeof window.showToast === "function") {
-            window.showToast("Realtime Database sync notice: check RTDB rules.", "error");
-          }
-        });
-    };
-
-    onValue(siteStateRef, (snapshot) => {
-      const remoteData = snapshot.val();
-      if (remoteData && typeof remoteData === "object") {
-        isRemoteSyncApplying = true;
-        window.applyRemoteFirebaseState(remoteData);
-        isRemoteSyncApplying = false;
-      } else {
-        window.pushStateToFirebase(window.getAppState());
-      }
-    }, (error) => {
-      console.warn("Firebase RTDB listener warning:", error);
-    });
-  </script>
-
   <script>
     // -----------------------------------------------------------------------
-    // 1. INITIAL DEFAULT STATE & REALTIME FIREBASE PERSISTENCE
+    // 1. INITIAL DEFAULT STATE & LOCAL STORAGE PERSISTENCE
     // -----------------------------------------------------------------------
     const STORAGE_KEY = 'aurelia_frames_rjy_cms_v3';
 
@@ -1879,7 +1873,9 @@
         ytUrl: 'https://youtube.com',
         fbUrl: 'https://facebook.com',
         copySuffix: 'All Rights Reserved.',
-        creditText: 'Designed & Developed by <a href="https://www.cbdigitalsolutions.in" target="_blank" rel="noopener noreferrer" class="text-champagne font-semibold hover:underline">CB DIGITAL SOLUTIONS</a>',
+        creditPrefix: 'Designed & Developed by',
+        creditName: 'CB DIGITAL SOLUTIONS',
+        creditUrl: 'https://www.cbdigitalsolutions.in',
         seoTitle: 'Aurelia Frames | Luxury Wedding Photographer in Rajahmundry',
         seoDesc: 'Premier Candid Wedding Photography, Pre-Wedding Shoots, and Luxury Wedding Cinematography in Rajahmundry, Andhra Pradesh.',
         theme: {
@@ -2117,11 +2113,11 @@
     function persistState() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        return Promise.resolve(true);
       } catch (err) {
-        console.warn('State save warning:', err);
-      }
-      if (typeof window.pushStateToFirebase === 'function') {
-        window.pushStateToFirebase(appState);
+        console.warn('Local storage quota notice:', err);
+        showToast('Storage limit reached. Try uploading smaller images.', 'error');
+        return Promise.resolve(false);
       }
     }
 
@@ -2132,32 +2128,199 @@
     let secretTapCount = 0;
     let secretTapTimer = null;
 
-    window.getAppState = function () {
-      return appState;
-    };
+    // -----------------------------------------------------------------------
+    // AUTOMATIC IMAGE COMPRESSION ENGINE (LOGO, GALLERY PHOTOS, COVERS)
+    // -----------------------------------------------------------------------
+    function compressImageFile(file, options = {}) {
+      const {
+        maxWidth = 1400,
+        maxHeight = 1400,
+        quality = 0.8,
+        preserveTransparency = false
+      } = options;
 
-    window.applyRemoteFirebaseState = function (remoteData) {
-      appState = {
-        ...defaultAppState,
-        ...remoteData,
-        adminAuth: { ...defaultAppState.adminAuth, ...(remoteData.adminAuth || {}) },
-        settings: { ...defaultAppState.settings, ...(remoteData.settings || {}) },
-        albums: Array.isArray(remoteData.albums) ? remoteData.albums : defaultAppState.albums,
-        photos: Array.isArray(remoteData.photos) ? remoteData.photos : defaultAppState.photos,
-        videos: Array.isArray(remoteData.videos) ? remoteData.videos : defaultAppState.videos,
-        services: Array.isArray(remoteData.services) ? remoteData.services : defaultAppState.services,
-        enquiries: Array.isArray(remoteData.enquiries) ? remoteData.enquiries : [],
-        testimonials: Array.isArray(remoteData.testimonials) ? remoteData.testimonials : defaultAppState.testimonials
-      };
+      return new Promise((resolve, reject) => {
+        if (!file || !file.type.startsWith('image/')) {
+          reject(new Error('Please select a valid image file.'));
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Could not read image file.'));
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onerror = () => reject(new Error('Invalid or corrupted image file.'));
+          img.onload = () => {
+            let width = img.width;
+            let height = img.height;
+
+            if (width > maxWidth || height > maxHeight) {
+              const ratio = Math.min(maxWidth / width, maxHeight / height);
+              width = Math.round(width * ratio);
+              height = Math.round(height * ratio);
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // WebP preserves transparent logo backgrounds while compressing heavily!
+            const outputMime = preserveTransparency ? 'image/webp' : 'image/jpeg';
+            let currentQuality = quality;
+            let compressedDataUrl = canvas.toDataURL(outputMime, currentQuality);
+
+            // Fallback if browser doesn't support WebP encoding
+            if (preserveTransparency && !compressedDataUrl.startsWith('data:image/webp')) {
+              compressedDataUrl = canvas.toDataURL('image/png');
+            } else {
+              // Adaptive quality step-down to keep storage fast and lightweight
+              while (compressedDataUrl.length > 290000 && currentQuality > 0.35) {
+                currentQuality -= 0.1;
+                compressedDataUrl = canvas.toDataURL(outputMime, currentQuality);
+              }
+            }
+
+            resolve(compressedDataUrl);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleLogoFileUpload(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-      } catch (e) {}
-      syncSettingsToDOM();
-      renderAllPublicSections();
-      if (isAdminAuthenticated) {
-        renderAllAdminSections();
+        showToast('Compressing logo image...');
+        const compressedLogo = await compressImageFile(file, {
+          maxWidth: 420,
+          maxHeight: 420,
+          quality: 0.85,
+          preserveTransparency: true
+        });
+        document.getElementById('cms-logo-url').value = compressedLogo;
+        appState.settings.logoUrl = compressedLogo;
+        event.target.value = '';
+        syncSettingsToDOM();
+        const ok = await persistState();
+        const kbSize = Math.round((compressedLogo.length * 3) / 4 / 1024);
+        if (ok) {
+          showToast(`Logo compressed (${kbSize} KB) & updated!`);
+        }
+      } catch (err) {
+        showToast(err.message || 'Logo upload failed.', 'error');
       }
-    };
+    }
+
+    async function saveDeveloperCreditDirectly() {
+      const prefixVal = document.getElementById('cms-credit-prefix').value.trim() || 'Designed & Developed by';
+      const nameVal = document.getElementById('cms-credit-name').value.trim() || 'CB DIGITAL SOLUTIONS';
+      let urlVal = document.getElementById('cms-credit-url').value.trim() || 'https://www.cbdigitalsolutions.in';
+      if (!/^https?:\/\//i.test(urlVal)) {
+        urlVal = 'https://' + urlVal;
+      }
+      document.getElementById('cms-credit-url').value = urlVal;
+
+      appState.settings.creditPrefix = prefixVal;
+      appState.settings.creditName = nameVal;
+      appState.settings.creditUrl = urlVal;
+
+      syncSettingsToDOM();
+      const ok = await persistState();
+      if (ok) {
+        showToast(`Developer link (${urlVal}) saved!`);
+      }
+    }
+
+    async function saveDeveloperCreditDirectly() {
+      const prefixVal = document.getElementById('cms-credit-prefix').value.trim() || 'Designed & Developed by';
+      const nameVal = document.getElementById('cms-credit-name').value.trim() || 'CB DIGITAL SOLUTIONS';
+      let urlVal = document.getElementById('cms-credit-url').value.trim() || 'https://www.cbdigitalsolutions.in';
+      if (!/^https?:\/\//i.test(urlVal)) {
+        urlVal = 'https://' + urlVal;
+      }
+      document.getElementById('cms-credit-url').value = urlVal;
+
+      appState.settings.creditPrefix = prefixVal;
+      appState.settings.creditName = nameVal;
+      appState.settings.creditUrl = urlVal;
+
+      syncSettingsToDOM();
+      const ok = await persistState();
+      if (ok) {
+        showToast(`Developer link (${urlVal}) saved & synced live to Firebase!`);
+      }
+    }
+
+    async function handleGalleryPhotoFileCompress(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        showToast('Compressing gallery photo...');
+        const compressedPhoto = await compressImageFile(file, {
+          maxWidth: 1400,
+          maxHeight: 1400,
+          quality: 0.8,
+          preserveTransparency: false
+        });
+        document.getElementById('photo-url-input').value = compressedPhoto;
+        event.target.value = '';
+        const kbSize = Math.round((compressedPhoto.length * 3) / 4 / 1024);
+        showToast(`Photo compressed to ${kbSize} KB! Ready to add.`);
+      } catch (err) {
+        showToast(err.message || 'Photo compression failed.', 'error');
+      }
+    }
+
+    async function handleAlbumCoverFileCompress(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        showToast('Compressing album cover image...');
+        const compressedCover = await compressImageFile(file, {
+          maxWidth: 1200,
+          maxHeight: 1500,
+          quality: 0.8,
+          preserveTransparency: false
+        });
+        document.getElementById('album-cover-input').value = compressedCover;
+        event.target.value = '';
+        const kbSize = Math.round((compressedCover.length * 3) / 4 / 1024);
+        showToast(`Cover compressed to ${kbSize} KB!`);
+      } catch (err) {
+        showToast(err.message || 'Cover compression failed.', 'error');
+      }
+    }
+
+    async function handleHeroFileUpload(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        showToast('Compressing widescreen hero image...');
+        const compressedHero = await compressImageFile(file, {
+          maxWidth: 1600,
+          maxHeight: 1080,
+          quality: 0.8,
+          preserveTransparency: false
+        });
+        document.getElementById('cms-hero-bg').value = compressedHero;
+        appState.settings.heroBg = compressedHero;
+        syncSettingsToDOM();
+        const ok = await persistState();
+        event.target.value = '';
+        const kbSize = Math.round((compressedHero.length * 3) / 4 / 1024);
+        if (ok) {
+          showToast(`Hero background compressed (${kbSize} KB) & synced live!`);
+        }
+      } catch (err) {
+        showToast(err.message || 'Hero image compression failed.', 'error');
+      }
+    }
 
     // -----------------------------------------------------------------------
     // 2. INITIALIZATION, MOBILE TOUCH SWIPE & SECRET ADMIN TRIGGERS
@@ -2546,6 +2709,17 @@
       window.open(`https://wa.me/${appState.settings.whatsapp}?text=${msg}`, '_blank', 'noopener,noreferrer');
     }
 
+    function openDeveloperCredit(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      let url = (appState.settings.creditUrl || 'https://www.cbdigitalsolutions.in').trim();
+      if (!url) url = 'https://www.cbdigitalsolutions.in';
+      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
     function resetEnquiryForm() {
       document.getElementById('customer-enquiry-form').reset();
       document.getElementById('enquiry-success-box').classList.add('hidden');
@@ -2589,7 +2763,7 @@
         window.open(`https://wa.me/${appState.settings.whatsapp}?text=${waText}`, '_blank', 'noopener,noreferrer');
       };
 
-      showToast('Enquiry received! Our Rajahmundry studio concierge will reach out shortly.');
+      showToast('Enquiry received! Our studio concierge will reach out shortly.');
     }
 
     function renderPortfolioFilters() {
@@ -2835,7 +3009,7 @@
       showToast('Admin Vault locked.');
     }
 
-    function updateAdminCredentials() {
+    async function updateAdminCredentials() {
       const newUser = document.getElementById('cms-admin-user').value.trim();
       const newPass = document.getElementById('cms-admin-pass').value;
       if (!newUser) {
@@ -2851,29 +3025,10 @@
         appState.adminAuth.password = newPass;
       }
       document.getElementById('cms-admin-pass').value = '';
-      persistState();
-      showToast('Admin login credentials updated & synced to Firebase!');
-    }
-
-    function handleLogoFileUpload(event) {
-      const file = event.target.files?.[0];
-      if (!file) return;
-      if (file.size > 650 * 1024) {
-        showToast('Please select a logo image smaller than 650KB or paste an image URL.', 'error');
-        return;
+      const ok = await persistState();
+      if (ok) {
+        showToast('Admin login credentials updated!');
       }
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const dataUrl = e.target?.result;
-        if (dataUrl) {
-          document.getElementById('cms-logo-url').value = dataUrl;
-          appState.settings.logoUrl = dataUrl;
-          persistState();
-          syncSettingsToDOM();
-          showToast('Brand logo uploaded & applied live!');
-        }
-      };
-      reader.readAsDataURL(file);
     }
 
     function switchAdminTab(tabName) {
@@ -3059,7 +3214,7 @@
       const photos = appState.photos.filter(p => p.albumId === selectedAlbumId).sort((a, b) => a.sortOrder - b.sortOrder);
 
       if (!photos.length) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-xs text-ivory/50">No photos in this album yet. Add one above!</div>`;
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-xs text-ivory/50">No photos in this album yet. Upload or paste one above!</div>`;
         return;
       }
 
@@ -3108,9 +3263,11 @@
       persistState();
       document.getElementById('photo-url-input').value = '';
       document.getElementById('photo-caption-input').value = '';
+      const fileInp = document.getElementById('photo-file-input');
+      if (fileInp) fileInp.value = '';
       renderAllAdminSections();
       renderAllPublicSections();
-      showToast('Photograph added to album & live portfolio!');
+      showToast('Photograph added to album & synced live!');
     }
 
     function movePhotoOrder(photoId, direction) {
@@ -3369,7 +3526,9 @@
       document.getElementById('cms-yt-url').value = s.ytUrl;
       document.getElementById('cms-fb-url').value = s.fbUrl;
       document.getElementById('cms-copy-suffix').value = s.copySuffix;
-      document.getElementById('cms-credit-text').value = s.creditText;
+      document.getElementById('cms-credit-prefix').value = s.creditPrefix || 'Designed & Developed by';
+      document.getElementById('cms-credit-name').value = s.creditName || 'CB DIGITAL SOLUTIONS';
+      document.getElementById('cms-credit-url').value = s.creditUrl || 'https://www.cbdigitalsolutions.in';
       document.getElementById('cms-seo-title').value = s.seoTitle;
       document.getElementById('cms-seo-desc').value = s.seoDesc;
 
@@ -3403,7 +3562,7 @@
       document.getElementById('cms-theme-champagne').value = chosen.champagne;
       persistState();
       syncSettingsToDOM();
-      showToast('Website theme updated & synced live across all screens!');
+      showToast('Website theme updated!');
     }
 
     function previewCustomThemeColors() {
@@ -3422,19 +3581,20 @@
     function renderCMSServicesEditor() {
       const container = document.getElementById('cms-services-editor-list');
       if (!container) return;
+      const escAttr = (str) => String(str || '').replace(/"/g, '&quot;');
       container.innerHTML = appState.services.map((srv, idx) => `
         <div class="p-4 rounded-xl bg-deepblack border border-white/10 grid grid-cols-1 sm:grid-cols-12 gap-3">
           <div class="sm:col-span-4">
             <label class="block text-[10px] uppercase text-ivory/50 mb-1">Service ${idx + 1} Title</label>
-            <input type="text" data-srv-title="${idx}" value="${srv.title}" class="w-full px-3 py-2 rounded-lg luxury-input" />
+            <input type="text" data-srv-title="${idx}" value="${escAttr(srv.title)}" class="w-full px-3 py-2 rounded-lg luxury-input" />
           </div>
           <div class="sm:col-span-4">
             <label class="block text-[10px] uppercase text-ivory/50 mb-1">Description</label>
-            <input type="text" data-srv-desc="${idx}" value="${srv.desc}" class="w-full px-3 py-2 rounded-lg luxury-input" />
+            <input type="text" data-srv-desc="${idx}" value="${escAttr(srv.desc)}" class="w-full px-3 py-2 rounded-lg luxury-input" />
           </div>
           <div class="sm:col-span-4">
             <label class="block text-[10px] uppercase text-ivory/50 mb-1">Deliverables / Pricing Note</label>
-            <input type="text" data-srv-deliv="${idx}" value="${srv.deliverables}" class="w-full px-3 py-2 rounded-lg luxury-input" />
+            <input type="text" data-srv-deliv="${idx}" value="${escAttr(srv.deliverables)}" class="w-full px-3 py-2 rounded-lg luxury-input" />
           </div>
         </div>
       `).join('');
@@ -3488,7 +3648,7 @@
       showToast('Testimonial deleted.');
     }
 
-    function saveFullCMSSettings() {
+    async function saveFullCMSSettings() {
       document.querySelectorAll('[data-srv-title]').forEach(el => {
         const idx = parseInt(el.dataset.srvTitle, 10);
         appState.services[idx].title = el.value.trim();
@@ -3501,6 +3661,11 @@
         const idx = parseInt(el.dataset.srvDeliv, 10);
         appState.services[idx].deliverables = el.value.trim();
       });
+
+      let cleanCreditUrl = document.getElementById('cms-credit-url').value.trim() || 'https://www.cbdigitalsolutions.in';
+      if (!/^https?:\/\//i.test(cleanCreditUrl)) {
+        cleanCreditUrl = 'https://' + cleanCreditUrl;
+      }
 
       appState.settings = {
         brandName: document.getElementById('cms-brand-name').value.trim(),
@@ -3552,7 +3717,9 @@
         ytUrl: document.getElementById('cms-yt-url').value.trim(),
         fbUrl: document.getElementById('cms-fb-url').value.trim(),
         copySuffix: document.getElementById('cms-copy-suffix').value.trim(),
-        creditText: document.getElementById('cms-credit-text').value.trim(),
+        creditPrefix: document.getElementById('cms-credit-prefix').value.trim() || 'Designed & Developed by',
+        creditName: document.getElementById('cms-credit-name').value.trim() || 'CB DIGITAL SOLUTIONS',
+        creditUrl: cleanCreditUrl,
         seoTitle: document.getElementById('cms-seo-title').value.trim(),
         seoDesc: document.getElementById('cms-seo-desc').value.trim(),
         theme: {
@@ -3565,10 +3732,12 @@
         }
       };
 
-      persistState();
       syncSettingsToDOM();
       renderAllPublicSections();
-      showToast('All Header-to-Footer changes published live to Firebase!');
+      const ok = await persistState();
+      if (ok) {
+        showToast('All Header-to-Footer changes published!');
+      }
     }
 
     function resetCMSDefaults() {
@@ -3706,7 +3875,14 @@
       document.getElementById('footer-description-text').textContent = s.footerDesc;
       document.getElementById('footer-copy-brand').textContent = s.brandName;
       document.getElementById('footer-copy-suffix').textContent = s.copySuffix;
-      document.getElementById('footer-credit-text').innerHTML = s.creditText;
+      document.getElementById('footer-credit-prefix').textContent = s.creditPrefix || 'Designed & Developed by';
+      const creditLinkEl = document.getElementById('footer-credit-link');
+      creditLinkEl.textContent = s.creditName || 'CB DIGITAL SOLUTIONS';
+      let cleanCreditUrl = (s.creditUrl || '').trim() || 'https://www.cbdigitalsolutions.in';
+      if (!/^https?:\/\//i.test(cleanCreditUrl)) {
+        cleanCreditUrl = 'https://' + cleanCreditUrl;
+      }
+      creditLinkEl.setAttribute('href', cleanCreditUrl);
       document.getElementById('footer-address').textContent = s.address;
       document.getElementById('footer-phone').textContent = s.phone;
       document.getElementById('footer-email').textContent = s.email;
