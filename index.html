@@ -938,7 +938,7 @@
           </p>
           <div class="tracking-wider flex items-center justify-center gap-1.5 relative z-30">
             <span id="footer-credit-prefix">Designed &amp; Developed by</span>
-            <a id="footer-credit-link" href="https://www.cbdigitalsolutions.in" target="_blank" rel="noopener noreferrer" class="inline-block py-1.5 px-1 text-champagne font-semibold underline decoration-champagne/50 hover:decoration-champagne cursor-pointer">CB DIGITAL SOLUTIONS</a>
+            <a id="footer-credit-link" href="https://www.cbdigitalsolutions.in" onclick="openDeveloperCredit(event)" target="_blank" rel="noopener noreferrer" class="inline-block py-1.5 px-1 text-champagne font-semibold underline decoration-champagne/50 hover:decoration-champagne cursor-pointer">CB DIGITAL SOLUTIONS</a>
           </div>
         </div>
       </div>
@@ -1096,9 +1096,9 @@
         </div>
 
         <div class="hidden lg:block pt-6 border-t border-white/10 space-y-3">
-          <div id="rtdb-status-badge" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] uppercase tracking-widest text-emerald-300">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Local Studio Storage</span>
+          <div id="rtdb-status-badge" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-[10px] uppercase tracking-widest text-amber-300">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <span>Connecting Live Sync...</span>
           </div>
           <button onclick="exitAdminPortal()" class="w-full py-3 rounded-xl border border-champagne/40 text-champagne text-xs uppercase tracking-[0.16em] hover:bg-champagne hover:text-deepblack transition-all flex items-center justify-center gap-2">
             <i class="fa-solid fa-globe"></i>
@@ -1748,72 +1748,78 @@
   <!-- ===================================================================== -->
   <!-- ADMIN CREATE / EDIT ALBUM MODAL (WITH AUTO-COMPRESS COVER UPLOAD)     -->
   <!-- ===================================================================== -->
-  <div id="album-form-modal" class="fixed inset-0 z-[95] hidden bg-deepblack/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="max-w-lg w-full p-6 sm:p-7 rounded-2xl luxury-card bg-charcoal space-y-5 my-auto">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
-        <h3 id="album-modal-heading" class="font-serif text-2xl text-ivory">Create Wedding Album</h3>
-        <button onclick="closeAlbumFormModal()" class="w-10 h-10 rounded-full flex items-center justify-center text-ivory/60 hover:text-champagne"><i class="fa-solid fa-xmark text-lg"></i></button>
-      </div>
+  <!-- Firebase Realtime Database Live Sync Module -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-      <form onsubmit="handleSaveAlbum(event)" class="space-y-4">
-        <input type="hidden" id="album-edit-id" />
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Couple / Album Title</label>
-          <input type="text" id="album-title-input" required placeholder="e.g., Pranathi & Aditya — Godavari Dusk" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Category</label>
-            <select id="album-category-input" class="w-full px-4 py-2.5 rounded-xl luxury-input">
-              <option value="Candid Wedding Photography">Candid Wedding Photography</option>
-              <option value="Traditional Wedding Photography">Traditional Wedding Photography</option>
-              <option value="Pre-Wedding Photography">Pre-Wedding Photography</option>
-              <option value="Engagement Photography">Engagement Photography</option>
-              <option value="Wedding Cinematography">Wedding Cinematography</option>
-              <option value="Reception Photography">Reception Photography</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Wedding Date</label>
-            <input type="text" id="album-date-input" required placeholder="e.g., November 15, 2026" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Wedding Venue</label>
-          <input type="text" id="album-venue-input" required placeholder="e.g., River Bay Resort, Rajahmundry" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Upload Cover <span class="text-champagne">(Auto-Compress)</span></label>
-            <input type="file" accept="image/*" onchange="handleAlbumCoverFileCompress(event)" class="w-full px-3 py-2 rounded-xl luxury-input text-xs file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-champagne file:text-deepblack file:font-semibold" />
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Or Cover Image URL</label>
-            <input type="text" id="album-cover-input" required placeholder="https://... or upload file" class="w-full px-4 py-2.5 rounded-xl luxury-input" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-ivory/75 mb-1.5">Story Narrative</label>
-          <textarea id="album-desc-input" rows="3" required placeholder="Describe the rituals, emotions, and highlights..." class="w-full px-4 py-2.5 rounded-xl luxury-input"></textarea>
-        </div>
-        <label class="flex items-center gap-2.5 text-xs text-ivory/80 cursor-pointer">
-          <input type="checkbox" id="album-published-input" checked class="accent-[#D4AF37] w-4 h-4" />
-          <span>Publish immediately on public Portfolio &amp; Wedding Stories</span>
-        </label>
-        <div class="pt-2 flex justify-end gap-3">
-          <button type="button" onclick="closeAlbumFormModal()" class="px-5 py-2.5 rounded-xl border border-white/15 text-xs text-ivory/75 hover:text-ivory">Cancel</button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-champagne text-deepblack text-xs font-semibold uppercase tracking-wider hover:bg-ivory">Save Album</button>
-        </div>
-      </form>
-    </div>
-  </div>
+    const firebaseConfig = {
+      databaseURL: "https://ss-wedding-website-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const siteStateRef = ref(db, "wedding_studio_cms_v1");
+
+    let isLocalSaving = false;
+
+    function updateSyncBadge(connected, label) {
+      const badge = document.getElementById("rtdb-status-badge");
+      if (!badge) return;
+      if (connected) {
+        badge.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] uppercase tracking-widest text-emerald-300";
+        badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span>${label || "Firebase Live Sync"}</span>`;
+      } else {
+        badge.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-red-500/10 border border-red-500/30 text-[10px] uppercase tracking-widest text-red-300";
+        badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-red-400"></span><span>${label || "Sync Offline"}</span>`;
+      }
+    }
+
+    window.pushStateToFirebase = async function (stateObj) {
+      try {
+        isLocalSaving = true;
+        const cleanPayload = JSON.parse(JSON.stringify(stateObj));
+        await set(siteStateRef, cleanPayload);
+        updateSyncBadge(true, "Firebase Live Sync");
+        return true;
+      } catch (err) {
+        console.error("Firebase write error:", err);
+        updateSyncBadge(false, "Firebase Write Blocked");
+        if (typeof window.showToast === "function") {
+          window.showToast("Firebase sync failed. Check Realtime Database Rules.", "error");
+        }
+        return false;
+      } finally {
+        setTimeout(() => {
+          isLocalSaving = false;
+        }, 400);
+      }
+    };
+
+    onValue(
+      siteStateRef,
+      (snapshot) => {
+        updateSyncBadge(true, "Firebase Live Sync");
+        const remoteData = snapshot.val();
+        if (!remoteData) {
+          window.pushStateToFirebase(window.getAppState());
+          return;
+        }
+        if (!isLocalSaving && typeof window.applyRemoteFirebaseState === "function") {
+          window.applyRemoteFirebaseState(remoteData);
+        }
+      },
+      (error) => {
+        console.error("Firebase read error:", error);
+        updateSyncBadge(false, "Firebase Read Error");
+      }
+    );
+  </script>
 
   <script>
     // -----------------------------------------------------------------------
-    // 1. INITIAL DEFAULT STATE & LOCAL STORAGE PERSISTENCE
+    // 1. INITIAL DEFAULT STATE & REAL-TIME FIREBASE SYNC (NO OVERWRITES)
     // -----------------------------------------------------------------------
-    const STORAGE_KEY = 'aurelia_frames_rjy_cms_v3';
-
     const defaultAppState = {
       adminAuth: {
         username: 'admin@aureliaframes.in',
@@ -2092,36 +2098,53 @@
       ]
     };
 
-    function loadPersistedState() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          return {
-            ...defaultAppState,
-            ...parsed,
-            adminAuth: { ...defaultAppState.adminAuth, ...(parsed.adminAuth || {}) },
-            settings: { ...defaultAppState.settings, ...(parsed.settings || {}) }
-          };
-        }
-      } catch (err) {
-        console.warn('State load fallback:', err);
-      }
-      return JSON.parse(JSON.stringify(defaultAppState));
-    }
+    let appState = JSON.parse(JSON.stringify(defaultAppState));
+    window.getAppState = () => appState;
 
     function persistState() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-        return Promise.resolve(true);
-      } catch (err) {
-        console.warn('Local storage quota notice:', err);
-        showToast('Storage limit reached. Try uploading smaller images.', 'error');
-        return Promise.resolve(false);
+      if (typeof window.pushStateToFirebase === 'function') {
+        return window.pushStateToFirebase(appState);
       }
+      return Promise.resolve(false);
     }
 
-    let appState = loadPersistedState();
+    window.applyRemoteFirebaseState = function (remoteData) {
+      if (!remoteData || typeof remoteData !== 'object') return;
+      const mergedSettings = {
+        ...defaultAppState.settings,
+        ...(remoteData.settings || {}),
+        theme: {
+          ...defaultAppState.settings.theme,
+          ...((remoteData.settings && remoteData.settings.theme) || {})
+        }
+      };
+      if (!mergedSettings.creditUrl || !mergedSettings.creditUrl.trim()) {
+        mergedSettings.creditUrl = 'https://www.cbdigitalsolutions.in';
+      }
+      if (!mergedSettings.creditName || !mergedSettings.creditName.trim()) {
+        mergedSettings.creditName = 'CB DIGITAL SOLUTIONS';
+      }
+
+      appState = {
+        ...defaultAppState,
+        ...remoteData,
+        adminAuth: { ...defaultAppState.adminAuth, ...(remoteData.adminAuth || {}) },
+        settings: mergedSettings,
+        albums: Array.isArray(remoteData.albums) ? remoteData.albums : defaultAppState.albums,
+        photos: Array.isArray(remoteData.photos) ? remoteData.photos : defaultAppState.photos,
+        videos: Array.isArray(remoteData.videos) ? remoteData.videos : defaultAppState.videos,
+        services: Array.isArray(remoteData.services) ? remoteData.services : defaultAppState.services,
+        enquiries: Array.isArray(remoteData.enquiries) ? remoteData.enquiries : defaultAppState.enquiries,
+        testimonials: Array.isArray(remoteData.testimonials) ? remoteData.testimonials : defaultAppState.testimonials
+      };
+
+      syncSettingsToDOM();
+      renderAllPublicSections();
+      if (isAdminAuthenticated) {
+        renderAllAdminSections();
+      }
+    };
+
     let lightboxCurrentIndex = 0;
     let lightboxPhotoList = [];
     let isAdminAuthenticated = false;
@@ -2168,16 +2191,13 @@
             ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(img, 0, 0, width, height);
 
-            // WebP preserves transparent logo backgrounds while compressing heavily!
             const outputMime = preserveTransparency ? 'image/webp' : 'image/jpeg';
             let currentQuality = quality;
             let compressedDataUrl = canvas.toDataURL(outputMime, currentQuality);
 
-            // Fallback if browser doesn't support WebP encoding
             if (preserveTransparency && !compressedDataUrl.startsWith('data:image/webp')) {
               compressedDataUrl = canvas.toDataURL('image/png');
             } else {
-              // Adaptive quality step-down to keep storage fast and lightweight
               while (compressedDataUrl.length > 290000 && currentQuality > 0.35) {
                 currentQuality -= 0.1;
                 compressedDataUrl = canvas.toDataURL(outputMime, currentQuality);
@@ -2210,30 +2230,10 @@
         const ok = await persistState();
         const kbSize = Math.round((compressedLogo.length * 3) / 4 / 1024);
         if (ok) {
-          showToast(`Logo compressed (${kbSize} KB) & updated!`);
+          showToast(`Logo compressed (${kbSize} KB) & synced live to Firebase!`);
         }
       } catch (err) {
         showToast(err.message || 'Logo upload failed.', 'error');
-      }
-    }
-
-    async function saveDeveloperCreditDirectly() {
-      const prefixVal = document.getElementById('cms-credit-prefix').value.trim() || 'Designed & Developed by';
-      const nameVal = document.getElementById('cms-credit-name').value.trim() || 'CB DIGITAL SOLUTIONS';
-      let urlVal = document.getElementById('cms-credit-url').value.trim() || 'https://www.cbdigitalsolutions.in';
-      if (!/^https?:\/\//i.test(urlVal)) {
-        urlVal = 'https://' + urlVal;
-      }
-      document.getElementById('cms-credit-url').value = urlVal;
-
-      appState.settings.creditPrefix = prefixVal;
-      appState.settings.creditName = nameVal;
-      appState.settings.creditUrl = urlVal;
-
-      syncSettingsToDOM();
-      const ok = await persistState();
-      if (ok) {
-        showToast(`Developer link (${urlVal}) saved!`);
       }
     }
 
@@ -3736,12 +3736,11 @@
       renderAllPublicSections();
       const ok = await persistState();
       if (ok) {
-        showToast('All Header-to-Footer changes published!');
+        showToast('All Header-to-Footer changes published & synced live to Firebase!');
       }
     }
 
     function resetCMSDefaults() {
-      localStorage.removeItem(STORAGE_KEY);
       appState = JSON.parse(JSON.stringify(defaultAppState));
       persistState();
       syncSettingsToDOM();
